@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>옥션 - 모바일 쇼핑은 옥션</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="http://eventimg.auction.co.kr/md/auction/08405BF42E/idangerous.swiper.css">
+    <script type="text/javascript" src="http://script.auction.co.kr/common/jquery.js"></script>
+    <script src="http://eventimg.auction.co.kr/md/auction/08405BF42E/idangerous.swiper.js"></script>
+    <style type="text/css">
+        *{margin:0;padding:0;}
+        img{border:0;vertical-align:top;}
+        li{list-style:none;}
+
+        #p_wrap{text-align:center;}
+
+        #p_header{width:100%;background:url(images/bg_top.jpg) center top repeat;}
+
+        #p_navi{width:100%;height:66px;position:relative;z-index:300;}
+        #p_navi_area{height:66px;z-index:10;background:url(images/bg_navi_shadow.png) left bottom repeat-x;}
+        #p_navi_cnt{height:61px;z-index:10;background:#945311;}
+        #p_navi_cnt ul{width:648px;margin:0 auto;overflow:hidden;}
+        #p_navi_cnt ul li{width:162px;float:left;text-align:center;}
+        #p_container h4{margin:0 0 30px 0;}
+
+        #p_section02, #p_section03, #p_section04, #p_section05, #p_section06{background-image:url(images/bg_cnt_line.png);background-repeat:repeat-x;background-position:center top;}
+
+        #p_section01{z-index:10;padding-bottom:55px;padding-top:5px;}
+
+        #p_section02{padding-bottom:55px;background-color:#f6f6f6;}
+        #p_section02 .farmer_main_goods{margin:0 0 30px 0;}
+
+        #p_section03{}
+
+        #p_section04{padding-bottom:55px;background-color:#f6f6f6;}
+
+        #p_section05{padding-bottom:55px;padding-top:2px;}
+
+        #p_section06{padding-bottom:55px;background-color:#f6f6f6;}
+
+        #p_coupon{}
+        #p_coupon .p_btn_coupon{margin-top:35px;}
+
+        .btn_more{margin:30px 0;}
+        .step_cnt{margin:30px 0;}
+
+        .review_list{width:980px;margin:0 auto;}
+        .review_list li{width:50%;float:left;text-align:center;}
+
+        .review_popup{display:none;}
+
+        .fixed{position:fixed;top:45px;left:0;width:100%;background:#fff;margin:0;z-index:100;}
+
+        .swiper-container{width:620px;margin:0 auto;}
+        .swiper-container .swiper-button-prev, .swiper-container .swiper-button-next{width:68px;height:68px;margin-top:-34px;}
+        .swiper-container .swiper-button-prev{left:0%;background:url(http://eventimg.auction.co.kr/md/auction/08A08E15DD/btn_prev.png) left top no-repeat;}
+        .swiper-container .swiper-button-next{right:0%;background:url(http://eventimg.auction.co.kr/md/auction/08A08E15DD/btn_next.png) left top no-repeat;}
+
+        .swiper-pagination {
+            bottom:20px;
+        }
+        .swiper-pagination-switch {
+            opacity: 1;
+            background:transparent;
+            width:8px;height:8px;
+            border:2px #000 solid;
+            margin:0 5px;
+        }
+        .swiper-visible-switch {
+            opacity: 1;
+            background:#000;
+        }
+
+        /* 팝업 */
+        #layer_popup{position:absolute;top:0;left:0;width:100%;height:100%;z-index:10;}
+        #layer_popup #layer_result{position:fixed;top:50%;left:50%;width:508px;margin-top:-200px;margin-left:-254px;z-index:100;}
+        #layer_popup #layer_result span{cursor:pointer;}
+        #layer_popup #dimmed{position:fixed;left:0%;top:0%;width:100%;height:100%;background:#000;opacity:0.5;z-index:1;filter: alpha(opacity:'50')}
+    </style>
+    <script type="text/javascript">
+        <!--
+        // 링크 연동
+        $(document).ready(function(){
+            var naviH = $("#p_navi").height();
+
+            // when scroll
+            $(window).scroll(function(){
+                var num = 0;
+                var aboveHeight = $("#p_navi").offset().top;
+
+                locate = $(window).scrollTop()+45;
+                locate2 = $(window).scrollTop()+45+naviH; // 마지막 네비높이
+
+                menuPos1 = $($("#p_navi_area li:eq(0) a").attr("href")).offset().top;
+                menuPos2 = $($("#p_navi_area li:eq(1) a").attr("href")).offset().top;
+                menuPos3 = $($("#p_navi_area li:eq(2) a").attr("href")).offset().top;
+                menuPos4 = $($("#p_navi_area li:eq(3) a").attr("href")).offset().top;
+
+                //scrolled down header's height
+                if (locate >= aboveHeight){
+                    $("#p_navi_area").addClass('fixed');
+                } else {
+                    $("#p_navi_area").removeClass('fixed');
+                }
+
+                if(locate2 < menuPos2){
+                    num = 0;
+                } else if(locate2 < menuPos3){
+                    num = 1;
+                } else if(locate2 < menuPos4){
+                    num = 2;
+                } else {
+                    num = 3;
+                }
+
+                $("#p_navi_area li").each(function(i){
+                    $("#p_navi_area li:eq("+i+") a img").attr("src", $("#p_navi_area li:eq("+i+") a img").attr("src").replace("_on.png", "_off.png"));
+                });
+                $("#p_navi_area li:eq("+num+") a img").attr("src", $("#p_navi_area li:eq("+num+") a img").attr("src").replace("_off.png", "_on.png"));
+            });
+
+            $("#p_navi_area ul li a").click(function(){
+                winHeight = $(window).scrollTop();
+
+                var iElm = $(this).attr("href");
+                var iElmPos = $(iElm).offset().top;
+
+                if(winHeight <= 90){
+                    $('html, body').stop().animate({ scrollTop: iElmPos-90-naviH }, "slow"); // 마지막 네비높이
+                } else {
+                    $('html, body').stop().animate({ scrollTop: iElmPos-45-naviH }, "slow"); // 마지막 네비높이
+                }
+                return false;
+            })
+        })
+
+        function reviewPopup(num){
+            $("#review0"+num).show();
+        }
+
+        function reviewPopupHide(eId){
+            $(".review_popup").hide();
+        }
+        //-->
+    </script>
+</head>
+<body>
+
+<div id="p_wrap">
+    <div id="p_header">
+        <img src="images/top.jpg" alt="" />
+    </div>
+
+    <div id="p_navi">
+        <div id="p_navi_area">
+            <div id="p_navi_cnt">
+                <ul>
+                    <li><a href="#p_section01"><img src="images/navi01_on.png" alt="" /></a></li>
+                    <li><a href="#p_section02"><img src="images/navi02_off.png" alt="" /></a></li>
+                    <li><a href="#p_section03"><img src="images/navi03_off.png" alt="" /></a></li>
+                    <li><a href="#p_section06"><img src="images/navi04_off.png" alt="" /></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="p_container">
+        <div id="p_section01">
+            <h3><img src="images/tit1.jpg" alt="" /></h3>
+
+            <div class="oneday_goods">
+                <iframe src="http://eventv2qadv01am.auction.co.kr/Event3/2015/11/30/12789_FreeMarket/IfrmOneday.aspx" frameborder="0" width="980" height="800" scrolling="no" allowtransparency="true"></iframe>
+            </div>
+
+            <h4><img src="images/cnt01_stit1.jpg" alt="" /></h4>
+            <div class="goods_cnt">
+                <iframe src="http://eventv2qadv01am.auction.co.kr/Event3/2015/11/30/12789_FreeMarket/IfrmOnedaySub.aspx" frameborder="0" width="980" height="722" scrolling="no" allowtransparency="true"></iframe>
+            </div>
+        </div>
+
+        <div id="p_section02">
+            <h3><img src="images/tit2.jpg" alt="" /></h3>
+
+            <div class="swiper-container">
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="http://eventimg.auction.co.kr/md/auction/08A08E15DD/event_goods_img01.jpg" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="http://eventimg.auction.co.kr/md/auction/08A08E15DD/event_goods_img02.jpg" alt="" />
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+
+                <div class="swiper-pagination"></div>
+            </div>
+            <script>
+                var swiper = new Swiper('.swiper-container', {
+                    pagination: '.swiper-pagination',
+                    paginationClickable: true,
+                    loop: true,
+                    autoplay: 4000,
+                    calculateHeight: true,
+                    simulateTouch : false
+                });
+                $('.swiper-button-prev').bind('click', function(e){
+                    e.preventDefault()
+                    swiper.swipePrev()
+                })
+                $('.swiper-button-next').bind('click', function(e){
+                    e.preventDefault()
+                    swiper.swipeNext()
+                })
+            </script>
+        </div>
+
+        <div id="p_section03">
+            <h3><img src="images/tit3.jpg" alt="" /></h3>
+
+            <div id="p_coupon">
+                <p><img src="images/coupon_img.jpg" alt="" /></p>
+                <div class="p_btn_coupon">
+                    <iframe src="dev/coupon.html" frameborder="0" width="980" height="70" scrolling="no" allowtransparency="true"></iframe>
+                </div>
+            </div>
+
+            <p><img src="images/coupon_notice.jpg" alt="" /></p>
+        </div>
+
+        <div id="p_section04">
+            <h3><img src="images/tit4.jpg" alt="" /></h3>
+
+            <h4><img src="images/cnt04_stit1.jpg" alt="" /></h4>
+            <div class="goods_cnt">
+                <iframe src="http://eventv2qadv01am.auction.co.kr/Event3/2015/11/30/12789_FreeMarket/IfrmPrdList.aspx?index=1" frameborder="0" width="980" height="368" scrolling="no" allowtransparency="true"></iframe>
+            </div>
+
+            <h4><img src="images/cnt04_stit2.jpg" alt="" /></h4>
+            <div class="goods_cnt">
+                <iframe src="http://eventv2qadv01am.auction.co.kr/Event3/2015/11/30/12789_FreeMarket/IfrmPrdList.aspx?index=2" frameborder="0" width="980" height="368" scrolling="no" allowtransparency="true"></iframe>
+            </div>
+
+            <h4><img src="images/cnt04_stit3.jpg" alt="" /></h4>
+            <div class="goods_cnt">
+                <iframe src="http://eventv2qadv01am.auction.co.kr/Event3/2015/11/30/12789_FreeMarket/IfrmPrdList.aspx?index=3" frameborder="0" width="980" height="368" scrolling="no" allowtransparency="true"></iframe>
+            </div>
+        </div>
+
+        <div id="p_section05">
+            <h3><img src="images/tit5.jpg" alt="" /></h3>
+
+            <div class="btn_more">
+                <a href=""><img src="images/btn_homeplus_more.png" alt="" /></a>
+            </div>
+
+            <div class="step_cnt">
+                <img src="images/homeplus_step.png" alt="" />
+            </div>
+
+            <div class="goods_cnt">
+                <iframe src="http://eventv2qadv01am.auction.co.kr/Event3/2015/11/30/12789_FreeMarket/IfrmPrdList.aspx?index=4" frameborder="0" width="980" height="368" scrolling="no" allowtransparency="true"></iframe>
+            </div>
+        </div>
+
+        <div id="p_section06">
+            <h3><img src="images/tit6.jpg" alt="" /></h3>
+
+            <div class="review_list">
+                <ul>
+                    <li>
+                        <a href="#" onclick="reviewPopup(1);return false;"><img src="images/review_cnt01.jpg" alt="" /></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="images/review_cnt01.jpg" alt="" /></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="review01" class="review_popup">
+    <a href="#" onclick="reviewPopupHide('#review_list01');return false;">리뷰</a>
+</div>
+
+</body>
+</html>
